@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Form, Input, Button, Alert } from 'antd';
 import { Logo } from 'assets';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import useAPICall from 'common/hooks/useAPICall';
 import './Login.less';
 import { getAccessToken } from 'common/services/bookingService';
-import { setAccessToken } from 'common/utils';
+import { clearAccessToken, setAccessToken } from 'common/utils';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from 'common/hooks/useAuth';
 
 const formItems = [
     {
@@ -44,10 +46,15 @@ const formItems = [
 
 function Login() {
     const { isLoading, hasError, response, executeApiCall } = useAPICall(false);
+    const { setToken } = useContext(UserContext);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (response && !hasError) {
-            setAccessToken(response.access_token);
+            setToken(response.access_token);
+            navigate('/', { replace: true });
+            console.log('hi');
         }
     }, [response]);
 
@@ -63,6 +70,7 @@ function Login() {
                 <Form
                     onFinish={onFinish}
                     autoComplete="off"
+                    initialValues={{ username: 'alo', password: 'alo' }}
                     className="login-form"
                     data-testid="bsui-login-form"
                 >

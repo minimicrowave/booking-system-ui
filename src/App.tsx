@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Home, Login } from 'pages';
+import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import useAuth, { UserProvider } from 'common/hooks/useAuth';
+
+const routes = [
+    { path: '/login', element: <Login />, isProtected: false },
+    { path: '/', element: <Home />, isProtected: true },
+];
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <UserProvider>
+            <BrowserRouter>
+                <Routes>
+                    {routes.map((route) => {
+                        const { path, element, isProtected } = route;
+                        return (
+                            <Route
+                                key={path}
+                                path={path}
+                                element={
+                                    isProtected ? useAuth(element) : element
+                                }
+                            />
+                        );
+                    })}
+                </Routes>
+            </BrowserRouter>
+        </UserProvider>
+    );
 }
 
 export default App;

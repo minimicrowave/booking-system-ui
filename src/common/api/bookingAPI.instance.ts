@@ -6,7 +6,6 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((req: AxiosRequestConfig) => {
-    console.log(req);
     req!.headers = {
         Authorization: `Bearer ${getAccessToken()}`,
         Accept: 'application/json',

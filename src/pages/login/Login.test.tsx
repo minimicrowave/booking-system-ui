@@ -60,6 +60,7 @@ describe('<Login/>', () => {
         describe('Validation', () => {
             it('should show username and passsword validation error messages if username and password not provided', async () => {
                 await userEvent.click(submitButton);
+                console.log();
                 await waitFor(() => {
                     expect(
                         screen.queryByText(errorMessages.username)
@@ -70,8 +71,8 @@ describe('<Login/>', () => {
                 });
             });
 
-            it('should show username validation error messages if username provided', async () => {
-                await userEvent.type(passwordField, password);
+            it('should show username validation error messages if only password provided', async () => {
+                await userEvent.type(usernameField, username);
                 await userEvent.click(submitButton);
 
                 await waitFor(() => {
@@ -84,7 +85,7 @@ describe('<Login/>', () => {
                 });
             });
 
-            it('should show password validation error messages if password provided', async () => {
+            it('should show password validation error messages if usernam provided', async () => {
                 await userEvent.type(passwordField, password);
                 await userEvent.click(submitButton);
 
@@ -103,19 +104,12 @@ describe('<Login/>', () => {
             const token = 'accessToken';
 
             it('should save access token in cookie upon successful retrieval', async () => {
-                const setAccessTokenSpy = jest.fn();
-
                 jest.spyOn(
                     bookingService,
                     'getAccessToken'
                 ).mockResolvedValueOnce(
                     createAxiosResponse({ access_token: token })
                 );
-
-                jest.spyOn(utils, 'setAccessToken').mockImplementationOnce(
-                    setAccessTokenSpy
-                );
-
                 // fill and submit form
                 await userEvent.type(passwordField, password);
                 await userEvent.type(usernameField, username);
@@ -132,9 +126,6 @@ describe('<Login/>', () => {
                     expect(usernameField).toBeEnabled();
                     expect(passwordField).toBeEnabled();
                 });
-
-                expect(setAccessTokenSpy).toHaveBeenCalledTimes(1);
-                expect(setAccessTokenSpy).toHaveBeenCalledWith(token);
             });
 
             it('should show error popup if access token retrieval fails', async () => {

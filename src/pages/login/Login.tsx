@@ -68,7 +68,6 @@ function Login() {
                 <Form
                     onFinish={onFinish}
                     autoComplete="off"
-                    initialValues={{ username: 'alo', password: 'alo' }}
                     className="login-form"
                     data-testid="bsui-login-form"
                 >

@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import { getAccessToken, setAccessToken } from '.';
+import { clearAccessToken, getAccessToken, setAccessToken } from '.';
 
 describe('Utils', () => {
     const accessToken = 'test';
@@ -11,7 +11,7 @@ describe('Utils', () => {
         });
     });
 
-    describe('getAccessToken()', () => {
+    describe('setAccessToken()', () => {
         it('should store access token in cookies', () => {
             const cookiesSetHandler = jest.fn();
             jest.spyOn(Cookies, 'set').mockImplementationOnce(
@@ -19,6 +19,17 @@ describe('Utils', () => {
             );
             setAccessToken(accessToken);
             expect(cookiesSetHandler).toBeCalledTimes(1);
+        });
+    });
+
+    describe('clearAccessToken()', () => {
+        it('should store access token in cookies', () => {
+            const cookiesRemoveHandler = jest.fn();
+            jest.spyOn(Cookies, 'remove').mockImplementationOnce(
+                cookiesRemoveHandler
+            );
+            clearAccessToken();
+            expect(cookiesRemoveHandler).toBeCalledTimes(1);
         });
     });
 });

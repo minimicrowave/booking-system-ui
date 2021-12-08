@@ -8,3 +8,7 @@ export function getAccessToken() {
 export function setAccessToken(accessToken: string) {
     Cookies.set(ACCESS_TOKEN_KEY, accessToken);
 }
+
+export function clearAccessToken() {
+    Cookies.remove(ACCESS_TOKEN_KEY);
+}

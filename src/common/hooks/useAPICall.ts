@@ -14,7 +14,6 @@ function useAPICall(toShowErrorNotification: boolean = true) {
             const { data } = await apiCall();
             setResponse(data);
         } catch (error: any) {
-            console.log('erri', error.response.status);
             setHasError(true);
             if (toShowErrorNotification)
                 errorNotifcation(

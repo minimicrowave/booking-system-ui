@@ -5,7 +5,6 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import useAPICall from 'common/hooks/useAPICall';
 import './Login.less';
 import { getAccessToken } from 'common/services/bookingService';
-import { clearAccessToken, setAccessToken } from 'common/utils';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from 'common/hooks/useAuth';
 
@@ -54,7 +53,6 @@ function Login() {
         if (response && !hasError) {
             setToken(response.access_token);
             navigate('/', { replace: true });
-            console.log('hi');
         }
     }, [response]);
 

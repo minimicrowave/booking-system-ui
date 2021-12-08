@@ -1,17 +1,20 @@
 import React from 'react';
 import { renderHook, act } from '@testing-library/react-hooks';
 import useAPICall from './useAPICall';
-import { waitFor } from '@testing-library/dom';
-import { AxiosError } from 'axios';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('useAPICall()', () => {
+    const wrapper = {
+        wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>,
+    };
+
     it('should be defined', () => {
-        const hook = renderHook(() => useAPICall());
+        const hook = renderHook(() => useAPICall(), wrapper);
         expect(hook).toBeDefined();
     });
 
     it('should return default state once instantiated', () => {
-        const hook = renderHook(() => useAPICall());
+        const hook = renderHook(() => useAPICall(), wrapper);
 
         const { isLoading, hasError, response, executeApiCall } =
             hook.result.current;
@@ -23,7 +26,7 @@ describe('useAPICall()', () => {
     });
 
     it('should run through api call events and set loading and success response accordingly', async () => {
-        const hook = renderHook(() => useAPICall());
+        const hook = renderHook(() => useAPICall(), wrapper);
         const data = 'data';
         const apiCall = jest.fn(() => ({ data }));
         const { executeApiCall } = hook.result.current;
@@ -43,7 +46,7 @@ describe('useAPICall()', () => {
     });
 
     it('should run through api call events and set loading and error response accordingly', async () => {
-        const hook = renderHook(() => useAPICall());
+        const hook = renderHook(() => useAPICall(), wrapper);
         const apiCall = jest.fn(() => {
             // eslint-disable-next-line no-throw-literal
             throw {

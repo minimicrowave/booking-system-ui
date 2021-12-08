@@ -1,16 +1,11 @@
 import React from 'react';
-import {
-    render,
-    screen,
-    waitFor,
-    waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { Login } from 'pages';
 import userEvent from '@testing-library/user-event';
 import * as bookingService from 'common/services/bookingService';
 import * as utils from 'common/utils';
 import { createAxiosResponse } from 'test/helpers';
-import { act } from 'react-dom/test-utils';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('<Login/>', () => {
     const formId = 'bsui-login-form';
@@ -23,12 +18,16 @@ describe('<Login/>', () => {
     const password = 'password';
 
     beforeEach(() => {
-        render(<Login />);
+        render(
+            <MemoryRouter>
+                <Login />
+            </MemoryRouter>
+        );
     });
 
     it('should succesfully render page with login form and logo', async () => {
         const form = await screen.findByTestId(formId);
-        const logo = await screen.findAllByTestId(logoId);
+        const logo = await screen.findByTestId(logoId);
         const inputs = await screen.findAllByTestId(inputId);
         const submitButton = await screen.findByTestId(buttonId);
 

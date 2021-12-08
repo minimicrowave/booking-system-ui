@@ -100,7 +100,7 @@ describe('<Login/>', () => {
             });
         });
 
-        describe.only('User flow', () => {
+        describe('User flow', () => {
             const token = 'accessToken';
 
             it('should save access token in cookie upon successful retrieval', async () => {

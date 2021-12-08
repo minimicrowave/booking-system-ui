@@ -1,4 +1,5 @@
-import { findByText, render, screen, fireEvent } from '@testing-library/react';
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { DownloadOutlined } from '@ant-design/icons';
 import { Button } from 'components';
 import { IButtonOptions } from './Button';
@@ -16,8 +17,7 @@ describe('<Button/>', () => {
         const button = screen.getByTestId(testId);
         expect(button).toBeDefined();
 
-        // @ts-ignore - seems like typing is not updated in official package
-        expect(findByText(baseOptions.buttonTitle)).toBeTruthy();
+        expect(screen.findByText(baseOptions.buttonTitle)).toBeTruthy();
     });
 
     it('should render button with icon', () => {

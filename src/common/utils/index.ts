@@ -14,9 +14,11 @@ export function clearAccessToken() {
     Cookies.remove(ACCESS_TOKEN_KEY);
 }
 
-export function isJWTValid(token: string) {
+export function isJWTValid(token: string | undefined) {
     try {
-        const decoded = jwtDecode(token);
+        if (!token) return false;
+
+        const decoded: any = jwtDecode(token);
         return new Date(decoded.exp * 1000) > new Date();
     } catch (error) {
         return true;

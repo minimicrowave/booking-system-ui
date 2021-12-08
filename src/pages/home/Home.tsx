@@ -14,7 +14,7 @@ const cards = [
     },
     {
         title: 'My Bookings',
-        path: '/',
+        path: '/bookings',
     },
 ];
 

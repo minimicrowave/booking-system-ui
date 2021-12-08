@@ -7,6 +7,7 @@ import { MemoryRouter } from 'react-router-dom';
 describe('<Home/>', () => {
     const navBarId = 'bsui-navbar';
     const cardId = 'bsui-card';
+
     beforeEach(() => {
         render(
             <MemoryRouter>

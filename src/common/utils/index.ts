@@ -1,5 +1,6 @@
 import { ACCESS_TOKEN_KEY } from 'common/constants';
 import Cookies from 'js-cookie';
+import jwtDecode from 'jwt-decode';
 
 export function getAccessToken() {
     return Cookies.get(ACCESS_TOKEN_KEY);
@@ -11,4 +12,13 @@ export function setAccessToken(accessToken: string) {
 
 export function clearAccessToken() {
     Cookies.remove(ACCESS_TOKEN_KEY);
+}
+
+export function isJWTValid(token: string) {
+    try {
+        const decoded = jwtDecode(token);
+        return new Date(decoded.exp * 1000) < new Date();
+    } catch (error) {
+        return true;
+    }
 }

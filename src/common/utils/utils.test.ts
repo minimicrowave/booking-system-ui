@@ -1,5 +1,10 @@
 import Cookies from 'js-cookie';
-import { clearAccessToken, getAccessToken, setAccessToken } from '.';
+import {
+    clearAccessToken,
+    getAccessToken,
+    isJWTValid,
+    setAccessToken,
+} from '.';
 
 describe('Utils', () => {
     const accessToken = 'test';
@@ -30,6 +35,28 @@ describe('Utils', () => {
             );
             clearAccessToken();
             expect(cookiesRemoveHandler).toBeCalledTimes(1);
+        });
+    });
+
+    describe('isJWTValid()', () => {
+        it('should return false if invalid JWT', () => {
+            expect(isJWTValid('')).toBe(true);
+        });
+
+        it('should return false if expired JWT', () => {
+            expect(
+                isJWTValid(
+                    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2Mzg5ODc4NzQsImV4cCI6MTIzODk5MTQ3NH0.kvaplJEjrTDd4-3jEEVazpo0n8GXNGHAAUpnmTZFTJs'
+                )
+            ).toBe(true);
+        });
+
+        it('should return true if valid JWT', () => {
+            expect(
+                isJWTValid(
+                    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2Mzg5ODc4NzQsImV4cCI6ODgzODk5MTQ3NH0.r0qOLRtDEqZ_Vr3p2jSnT0LYMeoHhGIEbFCOxHOjHkw'
+                )
+            ).toBe(false);
         });
     });
 });

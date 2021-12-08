@@ -9,3 +9,7 @@ export function getAccessToken(username: string, password: string) {
         password,
     });
 }
+
+export function getUserBookings(userId: string) {
+    return instance.get(BOOKING_API.getUserBookings(userId));
+}

@@ -2,6 +2,7 @@ import Cookies from 'js-cookie';
 import {
     clearAccessToken,
     getAccessToken,
+    getSubject,
     isJWTValid,
     setAccessToken,
 } from '.';
@@ -54,9 +55,31 @@ describe('Utils', () => {
         it('should return true if valid JWT', () => {
             expect(
                 isJWTValid(
-                    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2Mzg5ODc4NzQsImV4cCI6ODgzODk5MTQ3NH0.r0qOLRtDEqZ_Vr3p2jSnT0LYMeoHhGIEbFCOxHOjHkw'
+                    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKb2huIERvZSIsImlhdCI6MTYzODk4Nzg3NCwiZXhwIjo4ODM4OTkxNDc0fQ.fivq38p-v9f9TFKNsAl9t80vLjGace_Dap8Nocqw5RM'
                 )
             ).toBe(true);
+        });
+    });
+
+    describe('getSubject()', () => {
+        it('should return null if invalid JWT', () => {
+            expect(getSubject('')).toBeUndefined();
+        });
+
+        it('should return null if there is no subject', () => {
+            expect(
+                getSubject(
+                    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2Mzg5ODc4NzQsImV4cCI6MTIzODk5MTQ3NH0.kvaplJEjrTDd4-3jEEVazpo0n8GXNGHAAUpnmTZFTJs'
+                )
+            ).toBeUndefined();
+        });
+
+        it('should return subject if valid JWT', () => {
+            expect(
+                getSubject(
+                    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKb2huIERvZSIsImlhdCI6MTYzODk4Nzg3NCwiZXhwIjo4ODM4OTkxNDc0fQ.fivq38p-v9f9TFKNsAl9t80vLjGace_Dap8Nocqw5RM'
+                )
+            ).toBe('John Doe');
         });
     });
 });

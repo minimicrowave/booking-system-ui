@@ -19,8 +19,19 @@ export function isJWTValid(token: string | undefined) {
         if (!token) return false;
 
         const decoded: any = jwtDecode(token);
-        return new Date(decoded.exp * 1000) > new Date();
+        return new Date(decoded.exp * 1000) > new Date() && !!decoded.sub;
     } catch (error) {
         return true;
+    }
+}
+
+export function getSubject(token: string | undefined) {
+    try {
+        if (!token) return;
+
+        const decoded: any = jwtDecode(token);
+        return decoded.sub;
+    } catch (error) {
+        return;
     }
 }

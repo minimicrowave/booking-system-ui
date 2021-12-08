@@ -17,7 +17,7 @@ export function clearAccessToken() {
 export function isJWTValid(token: string) {
     try {
         const decoded = jwtDecode(token);
-        return new Date(decoded.exp * 1000) < new Date();
+        return new Date(decoded.exp * 1000) > new Date();
     } catch (error) {
         return true;
     }

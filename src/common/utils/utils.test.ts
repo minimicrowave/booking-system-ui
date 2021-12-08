@@ -40,7 +40,7 @@ describe('Utils', () => {
 
     describe('isJWTValid()', () => {
         it('should return false if invalid JWT', () => {
-            expect(isJWTValid('')).toBe(true);
+            expect(isJWTValid('')).toBe(false);
         });
 
         it('should return false if expired JWT', () => {
@@ -48,7 +48,7 @@ describe('Utils', () => {
                 isJWTValid(
                     'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2Mzg5ODc4NzQsImV4cCI6MTIzODk5MTQ3NH0.kvaplJEjrTDd4-3jEEVazpo0n8GXNGHAAUpnmTZFTJs'
                 )
-            ).toBe(true);
+            ).toBe(false);
         });
 
         it('should return true if valid JWT', () => {
@@ -56,7 +56,7 @@ describe('Utils', () => {
                 isJWTValid(
                     'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2Mzg5ODc4NzQsImV4cCI6ODgzODk5MTQ3NH0.r0qOLRtDEqZ_Vr3p2jSnT0LYMeoHhGIEbFCOxHOjHkw'
                 )
-            ).toBe(false);
+            ).toBe(true);
         });
     });
 });

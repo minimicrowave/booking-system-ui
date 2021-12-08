@@ -8,7 +8,7 @@ function NavBar() {
     const navigate = useNavigate();
 
     return (
-        <div className="nav-bar">
+        <div className="nav-bar" data-testid="bsui-navbar">
             <Logo size={120} />
             <Button
                 type="primary"

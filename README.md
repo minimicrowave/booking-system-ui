@@ -27,4 +27,13 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information
+
+## Deployment
+
+### `docker build --build-arg REACT_APP_BOOKING_API_BASEURL={db_endpoint} . -t bs-ui` 
+
+Builds the image with specified db endpoint.
+
+### `docker run --rm -it -p 3000:8080 bs-ui`
+ 
+ Runs an instance of the image on port 3000 of your machine.

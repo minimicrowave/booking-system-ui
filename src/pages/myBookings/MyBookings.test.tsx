@@ -46,6 +46,10 @@ describe('<MyBookings/>', () => {
     const rowId = 'ant-table-row';
 
     it('should render with logo and button', async () => {
+        jest.spyOn(bookingService, 'getUserBookings').mockResolvedValueOnce(
+            createAxiosResponse(data)
+        );
+
         render(
             <MemoryRouter>
                 <MyBookings />

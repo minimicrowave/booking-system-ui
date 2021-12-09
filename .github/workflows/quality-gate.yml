@@ -1,6 +1,6 @@
 name: Quality Gate
 env:
-     CI: false
+  CI: false
 on:
   push:
     branches-ignore:

@@ -25,6 +25,7 @@
         "start": "craco start",
         "build": "craco build",
         "test": "craco test",
+        "test:cov": "craco test --coverage",
         "eject": "craco eject"
     },
     "eslintConfig": {
@@ -62,6 +63,9 @@
     "jest": {
         "transformIgnorePatterns": [
             "/node_modules/(?!antd|@ant-design|rc-.+?|@babel/runtime).+(js|jsx)$"
+        ],
+        "collectCoverageFrom": [
+            "src/**/*.{js,jsx,ts,tsx}"
         ]
     }
 }

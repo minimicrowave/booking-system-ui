@@ -13,3 +13,21 @@ export function getAccessToken(username: string, password: string) {
 export function getUserBookings(userId: string) {
     return instance.get(BOOKING_API.getUserBookings(userId));
 }
+
+export function getLocations() {
+    return instance.get(BOOKING_API.getLocations());
+}
+
+export function createNewBooking(
+    userId: string,
+    locationId: string,
+    datetimeStart: string,
+    datetimeEnd: string
+) {
+    return instance.post(BOOKING_API.createNewBooking(), {
+        userId,
+        locationId,
+        datetimeStart,
+        datetimeEnd,
+    });
+}

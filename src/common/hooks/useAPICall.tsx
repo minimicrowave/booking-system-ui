@@ -8,6 +8,7 @@ function useAPICall(toShowErrorNotification: boolean = true) {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [response, setResponse] = useState<any>();
     const [hasError, setHasError] = useState(false);
+    const [executionCount, setExcecutionCount] = useState(0);
 
     async function executeApiCall(apiCall: Function) {
         try {
@@ -25,10 +26,11 @@ function useAPICall(toShowErrorNotification: boolean = true) {
             if (error.response.status === 401) navigate('/login');
         } finally {
             setIsLoading(false);
+            setExcecutionCount((val) => val + 1);
         }
     }
 
-    return { isLoading, hasError, response, executeApiCall };
+    return { isLoading, hasError, response, executeApiCall, executionCount };
 }
 
 export default useAPICall;

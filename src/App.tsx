@@ -1,13 +1,13 @@
 import React from 'react';
-import { Home, Login } from 'pages';
+import { Home, Login, MyBookings, NewBooking } from 'pages';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import useAuth, { UserProvider } from 'common/hooks/useAuth';
-import MyBookings from 'pages/myBookings/MyBookings';
 
 const routes = [
     { path: '/login', element: <Login />, isProtected: false },
     { path: '/', element: <Home />, isProtected: true },
     { path: '/bookings', element: <MyBookings />, isProtected: true },
+    { path: '/bookings/new', element: <NewBooking />, isProtected: true },
 ];
 
 function App() {

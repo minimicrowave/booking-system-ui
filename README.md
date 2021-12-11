@@ -1,39 +1,42 @@
-# booking-system-ui
+# Booking System UI 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A front-end project bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+```bash
+$ npm install
+```
 
-### `npm start`
+## Configuration
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Create an `.env` file in the project root by following and fill the values according to `.env.example`. 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+An example can be found below:
 
-### `npm test`
+```yml
+REACT_APP_BOOKING_API_BASEURL=http://127.0.0.1:8080 # endpoint backend application is running on
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Test
 
-### `npm build`
+```bash
+# unit tests
+$ npm run test
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# test coverage
+$ npm run test:cov
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-
-## Deployment
-
-### `docker build --build-arg REACT_APP_BOOKING_API_BASEURL={db_endpoint} . -t bs-ui` 
+# Deployment
 
 Builds the image with specified db endpoint.
+```
+docker build --build-arg REACT_APP_BOOKING_API_BASEURL={db_endpoint} . -t bs-ui
+```
 
-### `docker run --rm -it -p 3000:8080 bs-ui`
- 
+
  Runs an instance of the image on port 3000 of your machine.
+```
+docker run --rm -it -p 3000:8080 bs-ui
+```

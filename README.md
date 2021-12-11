@@ -18,6 +18,15 @@ An example can be found below:
 REACT_APP_BOOKING_API_BASEURL=http://127.0.0.1:8080 # endpoint backend application is running on
 ```
 
+## Running the app
+
+```bash
+# development
+$ npm run start 
+```
+
+
+
 ## Test
 
 ```bash

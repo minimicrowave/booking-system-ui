@@ -10,6 +10,13 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+     steps:
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: minimicrowave/bs-ui
+
       - name: Checkout
         uses: actions/checkout@v2
 

@@ -28,7 +28,7 @@ jobs:
         with:
           images: minimicrowave/bs-ui
           tags: |
-            type=raw, value={{push tag}}-${{steps.set_env_name.outputs.ENV_NAME }}
+            type=raw, value={{tag}}-${{steps.set_env_name.outputs.ENV_NAME }}
       -
         name: Login to DockerHub
         uses: docker/login-action@v1

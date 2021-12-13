@@ -37,7 +37,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-          -
+      -
         name: Load environment variables
         run: | 
           cat ".github/${{steps.set_env_name.outputs.ENV_NAME}}.env" >> $GITHUB_ENV

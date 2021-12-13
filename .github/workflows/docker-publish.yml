@@ -33,7 +33,7 @@ jobs:
         name: Set environment name
         id: set_env_name
         run: |
-          echo ::set-output name=ENV_NAME::${{startsWith(github.ref, 'refs/tags/v') && "prod" || "staging" }}
+          echo ::set-output name=ENV_NAME::${{startsWith(github.ref, 'refs/tags/v') && 'prod' || 'staging' }}
       -
         name: Load environment variables
         run: | 

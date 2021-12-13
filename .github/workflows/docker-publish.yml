@@ -36,10 +36,10 @@ jobs:
           fi
           echo ::set-output name=tags::${TAGS}
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-        with:
-          platforms: all
+      # - name: Set up QEMU
+      #   uses: docker/setup-qemu-action@v1
+      #   with:
+      #     platforms: all
 
       - name: Set up Docker Buildx
         id: buildx

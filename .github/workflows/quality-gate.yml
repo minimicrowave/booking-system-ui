@@ -4,7 +4,9 @@ env:
 on:
   push:
     branches-ignore:
-      - main
+      - master
+    paths-ignore:
+      - '**.md'
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest

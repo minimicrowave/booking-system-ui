@@ -37,7 +37,7 @@ jobs:
       -
         name: Load environment variables
         run: | 
-          cat ".github/${steps.set_env_name.outputs.ENV_NAME}.env" >> $GITHUB_ENV
+          cat ".github/${{steps.set_env_name.outputs.ENV_NAME}}.env" >> $GITHUB_ENV
       -
         name: Build and push
         uses: docker/build-push-action@v2
@@ -45,5 +45,5 @@ jobs:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
-            type=raw, value={{tag}}-${ {steps.set_env_name.outputs.ENV_NAME }}
+            type=raw, value={{tag}}-${{steps.set_env_name.outputs.ENV_NAME }}
           labels: ${{ steps.meta.outputs.labels }}

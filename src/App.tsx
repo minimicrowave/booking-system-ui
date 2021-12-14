@@ -17,7 +17,6 @@ function App() {
                 <Routes>
                     {routes.map((route) => {
                         const { path, element, isProtected } = route;
-                        console.log('ai');
                         return (
                             <Route key={path} path={path} element={element} />
                         );

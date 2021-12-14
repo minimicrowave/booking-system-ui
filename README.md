@@ -41,11 +41,11 @@ $ npm run test:cov
 
 Builds the image with specified db endpoint.
 ```
-docker build --build-arg REACT_APP_BOOKING_API_BASEURL={db_endpoint} . -t bs-ui
+docker build . -t bs-ui
 ```
 
 
- Runs an instance of the image on port 3000 of your machine.
+Runs an instance of the image on port 3000 of your machine.
 ```
-docker run --rm -it -p 3000:8080 bs-ui
+docker run --rm -it -p 3000:80 bs-ui
 ```

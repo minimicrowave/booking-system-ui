@@ -43,7 +43,9 @@ jobs:
       -
         name: Load environment variables
         run: | 
-          cat ".github/${{steps.set_env_name.outputs.ENV_NAME}}.env" >> $GITHUB_ENV
+          set -a # automatically export all variables
+          source ".github/${{steps.set_env_name.outputs.ENV_NAME}}.env" 
+          set +a
       -
         name: Build and push
         uses: docker/build-push-action@v2

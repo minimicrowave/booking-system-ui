@@ -43,9 +43,7 @@ jobs:
       -
         name: Load environment variables
         run: | 
-          set -o allexport # enables all following variable definitions to be exported
-          source ".github/${{steps.set_env_name.outputs.ENV_NAME}}.env" 
-          set +o allexport
+          cp ".github/${{steps.set_env_name.outputs.ENV_NAME}}.env" .env
       -
         name: Build and push
         uses: docker/build-push-action@v2

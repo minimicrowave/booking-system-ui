@@ -10,8 +10,9 @@ on:
       - '**.md'
 
 jobs:
-  docker:
     runs-on: ubuntu-latest
+    outputs: 
+      ENV: ${{steps.set_env_name.outputs.ENV_NAME}}
     steps:
       -
         name: Checkout
@@ -52,3 +53,20 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+    aws-deploy:
+      runs-on: ubuntu-latest
+      needs: [ docker-push ]
+      if: needs.docker-push.outputs.ENV == 'prod'
+      steps:
+      - 
+        name: Trigger deploy service stack
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GH_PAT }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: 'minimicrowave',
+              repo: 'booking-system-cf',
+              workflow_id: 'service.yml',
+              ref: 'master'
+            });

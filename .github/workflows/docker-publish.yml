@@ -10,6 +10,7 @@ on:
       - '**.md'
 
 jobs:
+  docker-push:
     runs-on: ubuntu-latest
     outputs: 
       ENV: ${{steps.set_env_name.outputs.ENV_NAME}}

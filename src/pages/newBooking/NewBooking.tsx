@@ -40,7 +40,6 @@ function NewBooking() {
             prevSubmissionCount != submissionCount &&
             !hasSubmissionError
         ) {
-            console.log('hi', prevSubmissionCount, submissionCount);
             navigate('/bookings');
         }
     }, [submissionCount, hasSubmissionError]);
@@ -58,7 +57,6 @@ function NewBooking() {
                 datetimeEnd.toISOString()
             )
         );
-        console.log('hidd');
     };
 
     return (

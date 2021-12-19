@@ -18,12 +18,15 @@ function useAPICall(toShowErrorNotification: boolean = true) {
             setResponse(data);
         } catch (error: any) {
             setHasError(true);
+            const errorCode = error?.response?.status;
             if (toShowErrorNotification)
                 errorNotifcation(
-                    errorMessages[error.response.status as number]
+                    errorCode
+                        ? errorMessages[errorCode as number]
+                        : 'Oh no, an unexpected error occured.'
                 );
 
-            if (error.response.status === 401) navigate('/login');
+            if (error?.response?.status === 401) navigate('/login');
         } finally {
             setIsLoading(false);
             setExcecutionCount((val) => val + 1);

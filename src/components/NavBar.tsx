@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Logo } from 'assets';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import './NavBar.less';
+import { UserContext } from 'common/hooks/useAuth';
 
 function NavBar() {
     const navigate = useNavigate();
+    const { removeToken } = useContext(UserContext);
 
     return (
         <div className="nav-bar" data-testid="bsui-navbar">
@@ -14,7 +16,9 @@ function NavBar() {
                 type="primary"
                 htmlType="submit"
                 data-testid="bsui-button"
-                onClick={() => navigate('/login', { replace: true })}
+                onClick={() =>
+                    removeToken() && navigate('/login', { replace: true })
+                }
             >
                 Sign Out
             </Button>

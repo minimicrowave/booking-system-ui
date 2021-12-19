@@ -1,7 +1,7 @@
 import React from 'react';
 import { Home, Login, MyBookings, NewBooking } from 'pages';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import useAuth, { UserProvider } from 'common/hooks/useAuth';
+import UseAuth, { UserProvider } from 'common/hooks/useAuth';
 
 const routes = [
     { path: '/login', element: <Login />, isProtected: false },
@@ -15,10 +15,19 @@ function App() {
         <UserProvider>
             <BrowserRouter>
                 <Routes>
-                    {routes.map((route) => {
-                        const { path, element, isProtected } = route;
+                    {routes.map(({ path, element, isProtected }) => {
                         return (
-                            <Route key={path} path={path} element={element} />
+                            <Route
+                                key={path}
+                                path={path}
+                                element={
+                                    isProtected ? (
+                                        <UseAuth>{element}</UseAuth>
+                                    ) : (
+                                        element
+                                    )
+                                }
+                            />
                         );
                     })}
                 </Routes>

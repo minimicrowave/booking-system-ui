@@ -57,9 +57,9 @@ export const UserProvider = ({ children }: any) => {
     );
 };
 
-function useAuth(component: ReactElement<any, any>) {
+function UseAuth({ children }: { children: ReactElement<any, any> }) {
     const { token, validateToken } = useContext(UserContext);
     validateToken();
-    return token && isJWTValid(token) ? component : <Navigate to="/login" />;
+    return token && isJWTValid(token) ? children : <Navigate to="/login" />;
 }
-export default useAuth;
+export default UseAuth;

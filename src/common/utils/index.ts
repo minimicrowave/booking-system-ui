@@ -1,4 +1,4 @@
-import { ACCESS_TOKEN_KEY } from 'common/constants';
+import { ACCESS_TOKEN_KEY } from 'common/constants/config';
 import Cookies from 'js-cookie';
 import jwtDecode from 'jwt-decode';
 

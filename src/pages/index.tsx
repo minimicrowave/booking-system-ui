@@ -1,6 +1,6 @@
-import Login from './login/Login';
-import Home from './home/Home';
-import MyBookings from './myBookings/MyBookings';
-import NewBooking from './newBooking/NewBooking';
+import Login from './login';
+import Home from './home';
+import MyBookings from './myBookings';
+import NewBooking from './newBooking';
 
 export { Login, Home, MyBookings, NewBooking };

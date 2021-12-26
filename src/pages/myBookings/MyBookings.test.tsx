@@ -1,7 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router';
 import { render, screen, waitFor } from '@testing-library/react';
-import MyBookings from './MyBookings';
+import MyBookings from '.';
 import { createAxiosResponse } from 'test/helpers';
 import * as bookingService from 'common/services/bookingService';
 

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import { Button } from 'antd';
 import { Logo } from 'assets';
-import { UserContext } from 'common/hooks/useAuth';
+import { UserContext } from 'common/context/authContext';
 import { useNavigate } from 'react-router-dom';
 import './NavBar.less';
 

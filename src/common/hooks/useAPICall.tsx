@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { errorMessages } from 'common/constants';
 import { ErrorNotification as errorNotification } from 'components';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 function useAPICall(toShowErrorNotification: boolean = true) {
     const navigate = useNavigate();

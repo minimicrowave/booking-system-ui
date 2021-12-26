@@ -1,6 +1,7 @@
 import React from 'react';
 
-import UseAuth, { UserProvider } from 'common/hooks/useAuth';
+import { UserProvider } from 'common/context/authContext';
+import { Auth } from 'components';
 import { Home, Login, MyBookings, NewBooking } from 'pages';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -23,7 +24,7 @@ function App() {
                                 path={path}
                                 element={
                                     isProtected ? (
-                                        <UseAuth>{element}</UseAuth>
+                                        <Auth>{element}</Auth>
                                     ) : (
                                         element
                                     )

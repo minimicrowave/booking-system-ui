@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import * as bookingService from 'common/services/bookingService';
-import { MemoryRouter } from 'react-router';
+import { MemoryRouter } from 'react-router-dom';
 import { createAxiosResponse } from 'test/helpers';
 
 import MyBookings from '.';

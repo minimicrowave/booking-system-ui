@@ -1,18 +1,12 @@
-import React, {
-    ReactElement,
-    useState,
-    createContext,
-    useContext,
-} from 'react';
+import React, { createContext, useState } from 'react';
 
 import {
-    getAccessToken,
-    setAccessToken,
-    isJWTValid,
     clearAccessToken,
+    getAccessToken,
     getSubject,
+    isJWTValid,
+    setAccessToken,
 } from 'common/utils';
-import { Navigate } from 'react-router-dom';
 
 export const UserContext = createContext<any>({
     token: getAccessToken(),
@@ -57,10 +51,3 @@ export const UserProvider = ({ children }: any) => {
         </UserContext.Provider>
     );
 };
-
-function UseAuth({ children }: { children: ReactElement<any, any> }) {
-    const { token, validateToken } = useContext(UserContext);
-    validateToken();
-    return token && isJWTValid(token) ? children : <Navigate to="/login" />;
-}
-export default UseAuth;

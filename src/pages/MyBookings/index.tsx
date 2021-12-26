@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 
 import { Table } from 'antd';
+import { UserContext } from 'common/context/authContext';
 import { useAPICall } from 'common/hooks';
-import { UserContext } from 'common/hooks/useAuth';
 import { getUserBookings } from 'common/services/bookingService';
 import { NavBar } from 'components';
 import dayjs from 'dayjs';

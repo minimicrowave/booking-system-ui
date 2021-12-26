@@ -1,13 +1,13 @@
 import React, { useContext, useEffect } from 'react';
 
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { Form, Input, Button, Alert } from 'antd';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { Alert, Button, Form, Input } from 'antd';
 import { Logo } from 'assets';
+import { UserContext } from 'common/context/authContext';
 import useAPICall from 'common/hooks/useAPICall';
-import './Login.less';
-import { UserContext } from 'common/hooks/useAuth';
 import { getAccessToken } from 'common/services/bookingService';
 import { useNavigate } from 'react-router-dom';
+import './Login.less';
 
 const formItems = [
     {

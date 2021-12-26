@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 
 import { Button, DatePicker, Form, Select, Typography } from 'antd';
+import { UserContext } from 'common/context/authContext';
 import { useAPICall, usePrevious } from 'common/hooks';
-import { UserContext } from 'common/hooks/useAuth';
 import { createNewBooking, getLocations } from 'common/services/bookingService';
 import { NavBar } from 'components';
 import { useNavigate } from 'react-router-dom';

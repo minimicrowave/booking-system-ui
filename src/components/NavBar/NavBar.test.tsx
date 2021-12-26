@@ -1,9 +1,10 @@
 import React from 'react';
+
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 
-import NavBar from './NavBar';
+import NavBar from '.';
 
 describe('<NavBar/>', () => {
     const logoId = 'bsui-logo';

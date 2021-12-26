@@ -1,7 +1,9 @@
 import React from 'react';
-import { renderHook, act } from '@testing-library/react-hooks';
-import useAPICall from './useAPICall';
+
+import { act, renderHook } from '@testing-library/react-hooks';
 import { MemoryRouter } from 'react-router-dom';
+
+import useAPICall from './useAPICall';
 
 describe('useAPICall()', () => {
     const wrapper = {

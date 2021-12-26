@@ -1,8 +1,8 @@
-import NavBar from 'components/NavBar';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { Card } from 'antd';
+import NavBar from 'components/NavBar';
+import { useNavigate } from 'react-router-dom';
 const { Meta } = Card;
 
 import './Home.less';

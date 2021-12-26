@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
-import { Logo } from 'assets';
+
 import { Button } from 'antd';
+import { Logo } from 'assets';
+import { UserContext } from 'common/hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import './NavBar.less';
-import { UserContext } from 'common/hooks/useAuth';
 
 function NavBar() {
     const navigate = useNavigate();

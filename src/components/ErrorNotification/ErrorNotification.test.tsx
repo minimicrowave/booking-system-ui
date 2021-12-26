@@ -1,5 +1,6 @@
 import { notification } from 'antd';
-import errorNotification from './ErrorNotification';
+
+import errorNotification from '.';
 
 describe('<ErrorNotification/>', () => {
     it('should trigger the error notification event', () => {

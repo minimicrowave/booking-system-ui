@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import errorNotifcation from 'components/ErrorNotification';
-import errorMessages from 'common/constants/errorMessages';
+import { useState } from 'react';
+
+import { errorMessages } from 'common/constants';
+import { ErrorNotification as errorNotification } from 'components';
 import { useNavigate } from 'react-router';
 
 function useAPICall(toShowErrorNotification: boolean = true) {
@@ -8,7 +9,7 @@ function useAPICall(toShowErrorNotification: boolean = true) {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [response, setResponse] = useState<any>();
     const [hasError, setHasError] = useState(false);
-    const [executionCount, setExcecutionCount] = useState(0);
+    const [executionCount, setExecutionCount] = useState(0);
 
     async function executeApiCall(apiCall: Function) {
         try {
@@ -20,16 +21,16 @@ function useAPICall(toShowErrorNotification: boolean = true) {
             setHasError(true);
             const errorCode = error?.response?.status;
             if (toShowErrorNotification)
-                errorNotifcation(
+                errorNotification(
                     errorCode
                         ? errorMessages[errorCode as number]
-                        : 'Oh no, an unexpected error occured.'
+                        : 'Oh no, an unexpected error occurred.'
                 );
 
             if (error?.response?.status === 401) navigate('/login');
         } finally {
             setIsLoading(false);
-            setExcecutionCount((val) => val + 1);
+            setExecutionCount((val) => val + 1);
         }
     }
 

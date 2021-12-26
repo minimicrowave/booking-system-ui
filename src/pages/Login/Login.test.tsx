@@ -1,11 +1,12 @@
 import React from 'react';
+
 import { render, screen, waitFor } from '@testing-library/react';
-import { Login } from 'pages';
 import userEvent from '@testing-library/user-event';
 import * as bookingService from 'common/services/bookingService';
 import * as utils from 'common/utils';
-import { createAxiosResponse } from 'test/helpers';
+import { Login } from 'pages';
 import { MemoryRouter } from 'react-router-dom';
+import { createAxiosResponse } from 'test/helpers';
 
 describe('<Login/>', () => {
     const formId = 'bsui-login-form';

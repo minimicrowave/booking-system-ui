@@ -1,7 +1,8 @@
 import React from 'react';
-import { Home, Login, MyBookings, NewBooking } from 'pages';
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+
 import UseAuth, { UserProvider } from 'common/hooks/useAuth';
+import { Home, Login, MyBookings, NewBooking } from 'pages';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const routes = [
     { path: '/login', element: <Login />, isProtected: false },

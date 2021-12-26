@@ -1,11 +1,12 @@
-import NavBar from 'components/NavBar';
 import React, { useContext, useEffect } from 'react';
+
 import { Table } from 'antd';
-import useAPICall from 'common/hooks/useAPICall';
+import { useAPICall } from 'common/hooks';
 import { UserContext } from 'common/hooks/useAuth';
+import { getUserBookings } from 'common/services/bookingService';
+import { NavBar } from 'components';
 import dayjs from 'dayjs';
 import './MyBookings.less';
-import { getUserBookings } from 'common/services/bookingService';
 
 const columns = [
     {

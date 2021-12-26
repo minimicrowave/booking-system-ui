@@ -1,13 +1,14 @@
-import NavBar from 'components/NavBar';
-import { Form, Select, Button, DatePicker, Typography } from 'antd';
+import React, { useContext, useEffect } from 'react';
+
+import { Button, DatePicker, Form, Select, Typography } from 'antd';
+import { useAPICall, usePrevious } from 'common/hooks';
+import { UserContext } from 'common/hooks/useAuth';
+import { createNewBooking, getLocations } from 'common/services/bookingService';
+import { NavBar } from 'components';
+import { useNavigate } from 'react-router-dom';
+
 const { RangePicker } = DatePicker;
 const { Title } = Typography;
-import React, { useContext, useEffect } from 'react';
-import useAPICall from 'common/hooks/useAPICall';
-import { createNewBooking, getLocations } from 'common/services/bookingService';
-import { UserContext } from 'common/hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
-import usePrevious from 'common/hooks/useHook';
 
 const { Option } = Select;
 
@@ -35,6 +36,7 @@ function NewBooking() {
     }, []);
 
     useEffect(() => {
+        // if form is submitted with no error, and not on initial form render
         if (
             submissionCount >= 1 &&
             prevSubmissionCount != submissionCount &&

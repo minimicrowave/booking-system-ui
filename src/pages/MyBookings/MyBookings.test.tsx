@@ -1,9 +1,11 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router';
+
 import { render, screen, waitFor } from '@testing-library/react';
-import MyBookings from '.';
-import { createAxiosResponse } from 'test/helpers';
 import * as bookingService from 'common/services/bookingService';
+import { MemoryRouter } from 'react-router';
+import { createAxiosResponse } from 'test/helpers';
+
+import MyBookings from '.';
 
 const data = [
     {

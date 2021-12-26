@@ -4,7 +4,7 @@ import React, {
     createContext,
     useContext,
 } from 'react';
-import { Navigate } from 'react-router-dom';
+
 import {
     getAccessToken,
     setAccessToken,
@@ -12,6 +12,7 @@ import {
     clearAccessToken,
     getSubject,
 } from 'common/utils';
+import { Navigate } from 'react-router-dom';
 
 export const UserContext = createContext<any>({
     token: getAccessToken(),

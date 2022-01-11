@@ -1,24 +1,32 @@
 import instance from 'common/api/bookingAPI.instance';
 import endpoints from 'common/constants/endpoints';
+import { ICredentials } from 'common/types/credentials';
+import { useMutation, useQuery } from 'react-query';
 
 const { BOOKING_API } = endpoints;
 
-export function getAccessToken(username: string, password: string) {
-    return instance.post(BOOKING_API.getAccessToken(), {
-        username,
-        password,
-    });
+export function fetchAccessToken(options?: object): any {
+    return useMutation(
+        ({ username, password }: ICredentials) =>
+            instance.post(BOOKING_API.getAccessToken(), {
+                username,
+                password,
+            }),
+        options
+    );
 }
 
 export function fetchUserBookings(userId: string): any {
-    return instance.get(BOOKING_API.getUserBookings(userId));
+    return useQuery('bookings', () =>
+        instance.get(BOOKING_API.getUserBookings(userId))
+    );
 }
 
 export function fetchLocations(): any {
     return instance.get(BOOKING_API.getLocations());
 }
 
-export function fetchNewBooking(
+export function createNewBooking(
     userId: string,
     locationId: string,
     datetimeStart: string,

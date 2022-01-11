@@ -38,10 +38,11 @@ export const UserProvider = ({ children }: any) => {
             value={{
                 token,
                 userId,
-                setToken: (token: string) => {
+                setToken: (token: string, callback?: Function) => {
                     setToken(token);
                     setAccessToken(token);
                     setUserId(getSubject(token));
+                    callback && callback();
                 },
                 removeToken,
                 validateToken,

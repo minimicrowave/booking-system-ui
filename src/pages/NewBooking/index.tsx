@@ -4,8 +4,8 @@ import { Button, DatePicker, Form, Select, Typography } from 'antd';
 import { UserContext } from 'common/context/authContext';
 import { useAPICall, usePrevious } from 'common/hooks';
 import {
+    createNewBooking,
     fetchLocations,
-    fetchNewBooking,
 } from 'common/services/bookingService';
 import { NavBar } from 'components';
 import { useNavigate } from 'react-router-dom';
@@ -70,7 +70,7 @@ function NewBooking() {
             dateRange: [datetimeStart, datetimeEnd],
         } = values;
         executeBookingApiCall(() =>
-            fetchNewBooking(
+            createNewBooking(
                 userId,
                 locationId,
                 datetimeStart.toISOString(),

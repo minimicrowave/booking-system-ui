@@ -1,11 +1,11 @@
 import React from 'react';
 
-import queryClient from 'common/config/reactQueryClient.config';
+import getQueryClient from 'common/config/reactQueryClient.config';
 import { UserProvider } from 'common/context/authContext';
 import { Auth } from 'components';
 import { Home, Login, MyBookings, NewBooking } from 'pages';
 import { QueryClientProvider } from 'react-query';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 const routes = [
     { path: '/login', element: <Login />, isProtected: false },
@@ -25,14 +25,14 @@ function getRoutes(): React.ReactNode {
 }
 
 function App() {
+    const navigate = useNavigate();
+
     return (
-        <QueryClientProvider client={queryClient}>
-            <UserProvider>
-                <BrowserRouter>
-                    <Routes>{getRoutes()}</Routes>
-                </BrowserRouter>
-            </UserProvider>
-        </QueryClientProvider>
+        <UserProvider>
+            <QueryClientProvider client={getQueryClient(navigate)}>
+                <Routes>{getRoutes()}</Routes>
+            </QueryClientProvider>
+        </UserProvider>
     );
 }
 

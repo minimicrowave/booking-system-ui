@@ -5,7 +5,6 @@ import { UserContext } from 'common/context/authContext';
 import { fetchUserBookings } from 'common/services/bookingService';
 import { NavBar } from 'components';
 import dayjs from 'dayjs';
-import { useQuery } from 'react-query';
 import TEST_ID from 'test/testIds.constant';
 import './MyBookings.less';
 
@@ -37,10 +36,8 @@ const columns = [
 ];
 
 function MyBookings() {
-    const { isLoading, isError, data } = useQuery('bookings', () =>
-        fetchUserBookings(userId)
-    );
     const { userId } = useContext(UserContext);
+    const { isLoading, isError, data } = fetchUserBookings(userId);
 
     return (
         <>

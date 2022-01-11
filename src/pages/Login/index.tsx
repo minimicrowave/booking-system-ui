@@ -4,9 +4,9 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Alert, Button, Form, Input } from 'antd';
 import { Logo } from 'assets';
 import { UserContext } from 'common/context/authContext';
-import useAPICall from 'common/hooks/useAPICall';
-import { getAccessToken } from 'common/services/bookingService';
+import { fetchAccessToken } from 'common/services/bookingService';
 import { useNavigate } from 'react-router-dom';
+import TEST_ID from 'test/testIds.constant';
 import './Login.less';
 
 const formItems = [
@@ -45,21 +45,23 @@ const formItems = [
 ];
 
 function Login() {
-    const { isLoading, hasError, response, executeApiCall } = useAPICall(false);
     const { setToken } = useContext(UserContext);
+
+    const { isLoading, isError, data, isSuccess, mutate } = fetchAccessToken({
+        useErrorBoundary: false,
+    });
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (response && !hasError) {
-            setToken(response.access_token);
-            navigate('/', { replace: true });
+        if (isSuccess) {
+            setToken(data.access_token, () => navigate('/', { replace: true }));
         }
-    }, [response]);
+    }, [isSuccess]);
 
     const onFinish = (values: any) => {
         const { username, password } = values;
-        executeApiCall(() => getAccessToken(username, password));
+        mutate({ username, password });
     };
 
     return (
@@ -70,32 +72,32 @@ function Login() {
                     onFinish={onFinish}
                     autoComplete="off"
                     className="login-form"
-                    data-testid="bsui-login-form"
+                    data-testid={TEST_ID.FORM}
                 >
                     {formItems.map(({ name, rules, input }) => (
                         <Form.Item
                             name={name}
                             rules={rules}
                             key={`login-form-${name}`}
-                            data-testid="bsui-form-input"
+                            data-testid={TEST_ID.INPUT}
                         >
                             {input(isLoading)}
                         </Form.Item>
                     ))}
-                    {hasError && (
+                    {isError && (
                         <Alert
                             message="Error logging in. Please try again."
                             showIcon
                             type="error"
                             className="login-form-error"
-                            data-testid="bsui-alert"
+                            data-testid={TEST_ID.ALERT}
                         />
                     )}
                     <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                         <Button
                             type="primary"
                             htmlType="submit"
-                            data-testid="bsui-form-button"
+                            data-testid={TEST_ID.BUTTON}
                             loading={isLoading}
                         >
                             Login

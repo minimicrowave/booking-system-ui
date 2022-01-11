@@ -3,7 +3,10 @@ import React, { useContext, useEffect } from 'react';
 import { Button, DatePicker, Form, Select, Typography } from 'antd';
 import { UserContext } from 'common/context/authContext';
 import { useAPICall, usePrevious } from 'common/hooks';
-import { createNewBooking, getLocations } from 'common/services/bookingService';
+import {
+    fetchLocations,
+    fetchNewBooking,
+} from 'common/services/bookingService';
 import { NavBar } from 'components';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,6 +14,18 @@ const { RangePicker } = DatePicker;
 const { Title } = Typography;
 
 const { Option } = Select;
+
+function isFormSubmittedSuccessfully(
+    currentSubmissionCount: number,
+    prevSubmissionCount: number | undefined,
+    hasSubmissionError: boolean
+) {
+    return (
+        currentSubmissionCount >= 1 &&
+        prevSubmissionCount != currentSubmissionCount &&
+        !hasSubmissionError
+    );
+}
 
 function NewBooking() {
     const { userId } = useContext(UserContext);
@@ -29,18 +44,21 @@ function NewBooking() {
         executionCount: submissionCount,
     } = useAPICall();
 
-    const prevSubmissionCount = usePrevious(submissionCount);
+    const prevSubmissionCount: number | undefined =
+        usePrevious(submissionCount);
 
     useEffect(() => {
-        executeLocationApiCall(getLocations);
+        executeLocationApiCall(fetchLocations);
     }, []);
 
     useEffect(() => {
         // if form is submitted with no error, and not on initial form render
         if (
-            submissionCount >= 1 &&
-            prevSubmissionCount != submissionCount &&
-            !hasSubmissionError
+            isFormSubmittedSuccessfully(
+                submissionCount,
+                prevSubmissionCount,
+                hasSubmissionError
+            )
         ) {
             navigate('/bookings');
         }
@@ -52,7 +70,7 @@ function NewBooking() {
             dateRange: [datetimeStart, datetimeEnd],
         } = values;
         executeBookingApiCall(() =>
-            createNewBooking(
+            fetchNewBooking(
                 userId,
                 locationId,
                 datetimeStart.toISOString(),

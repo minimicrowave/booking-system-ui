@@ -1,13 +1,15 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import { Table } from 'antd';
 import { UserContext } from 'common/context/authContext';
-import { useAPICall } from 'common/hooks';
-import { getUserBookings } from 'common/services/bookingService';
+import { fetchUserBookings } from 'common/services/bookingService';
 import { NavBar } from 'components';
 import dayjs from 'dayjs';
+import { useQuery } from 'react-query';
+import TEST_ID from 'test/testIds.constant';
 import './MyBookings.less';
 
+const dateFormat = 'MMMM D, YYYY h:mm A';
 const columns = [
     {
         title: 'ID',
@@ -18,15 +20,13 @@ const columns = [
         title: 'From',
         dataIndex: 'datetimeStart',
         key: 'datetimeStart',
-        render: (datetimeStart: string) =>
-            dayjs(datetimeStart).format('MMMM D, YYYY h:mm A'),
+        render: (date: string) => dayjs(date).format(dateFormat),
     },
     {
         title: 'To',
         dataIndex: 'datetimeEnd',
         key: 'datetimeEnd',
-        render: (datetimeEnd: string) =>
-            dayjs(datetimeEnd).format('MMMM D, YYYY h:mm A'),
+        render: (date: string) => dayjs(date).format(dateFormat),
     },
     {
         title: 'Location',
@@ -37,12 +37,10 @@ const columns = [
 ];
 
 function MyBookings() {
-    const { isLoading, hasError, response, executeApiCall } = useAPICall();
+    const { isLoading, isError, data } = useQuery('bookings', () =>
+        fetchUserBookings(userId)
+    );
     const { userId } = useContext(UserContext);
-
-    useEffect(() => {
-        executeApiCall(() => getUserBookings(userId));
-    }, []);
 
     return (
         <>
@@ -50,9 +48,9 @@ function MyBookings() {
             <Table
                 className="table-container"
                 columns={columns}
-                dataSource={response}
-                loading={isLoading || hasError}
-                data-testid="bsui-table"
+                dataSource={data}
+                loading={isLoading || isError}
+                data-testid={TEST_ID.TABLE}
             />
         </>
     );

@@ -1,8 +1,10 @@
 import React from 'react';
 
+import queryClient from 'common/config/reactQueryClient.config';
 import { UserProvider } from 'common/context/authContext';
 import { Auth } from 'components';
 import { Home, Login, MyBookings, NewBooking } from 'pages';
+import { QueryClientProvider } from 'react-query';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const routes = [
@@ -12,29 +14,25 @@ const routes = [
     { path: '/bookings/new', element: <NewBooking />, isProtected: true },
 ];
 
+function getRoutes(): React.ReactNode {
+    return routes.map(({ path, element, isProtected }) => (
+        <Route
+            key={path}
+            path={path}
+            element={isProtected ? <Auth>{element}</Auth> : element}
+        />
+    ));
+}
+
 function App() {
     return (
-        <UserProvider>
-            <BrowserRouter>
-                <Routes>
-                    {routes.map(({ path, element, isProtected }) => {
-                        return (
-                            <Route
-                                key={path}
-                                path={path}
-                                element={
-                                    isProtected ? (
-                                        <Auth>{element}</Auth>
-                                    ) : (
-                                        element
-                                    )
-                                }
-                            />
-                        );
-                    })}
-                </Routes>
-            </BrowserRouter>
-        </UserProvider>
+        <QueryClientProvider client={queryClient}>
+            <UserProvider>
+                <BrowserRouter>
+                    <Routes>{getRoutes()}</Routes>
+                </BrowserRouter>
+            </UserProvider>
+        </QueryClientProvider>
     );
 }
 

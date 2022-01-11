@@ -10,20 +10,20 @@ export function getAccessToken(username: string, password: string) {
     });
 }
 
-export function getUserBookings(userId: string) {
+export function fetchUserBookings(userId: string): any {
     return instance.get(BOOKING_API.getUserBookings(userId));
 }
 
-export function getLocations() {
+export function fetchLocations(): any {
     return instance.get(BOOKING_API.getLocations());
 }
 
-export function createNewBooking(
+export function fetchNewBooking(
     userId: string,
     locationId: string,
     datetimeStart: string,
     datetimeEnd: string
-) {
+): any {
     return instance.post(BOOKING_API.createNewBooking(), {
         userId,
         locationId,

@@ -3,7 +3,6 @@ import React, { useContext } from 'react';
 import { Table } from 'antd';
 import { UserContext } from 'common/context/authContext';
 import { fetchUserBookings } from 'common/services/bookingService';
-import { NavBar } from 'components';
 import dayjs from 'dayjs';
 import TEST_ID from 'test/testIds.constant';
 import './MyBookings.less';
@@ -40,16 +39,13 @@ function MyBookings() {
     const { isLoading, isError, data } = fetchUserBookings(userId);
 
     return (
-        <>
-            <NavBar />
-            <Table
-                className="table-container"
-                columns={columns}
-                dataSource={data}
-                loading={isLoading || isError}
-                data-testid={TEST_ID.TABLE}
-            />
-        </>
+        <Table
+            className="table-container"
+            columns={columns}
+            dataSource={data}
+            loading={isLoading || isError}
+            data-testid={TEST_ID.TABLE}
+        />
     );
 }
 

@@ -6,7 +6,7 @@ import './Home.less';
 
 const { Meta } = Card;
 
-const cards = [
+export const CARDS_METADATA = [
     {
         title: 'Create Booking',
         path: '/bookings/new',
@@ -22,7 +22,7 @@ function Home() {
 
     return (
         <div className="card-container">
-            {cards.map(({ title, path }) => (
+            {CARDS_METADATA.map(({ title, path }) => (
                 <Card
                     hoverable
                     data-testid="bsui-card"

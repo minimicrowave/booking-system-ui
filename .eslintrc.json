@@ -26,6 +26,7 @@
     "rules": {
         "prettier/prettier": "error",
         "require-jsdoc": "off",
+        "guard-for-in": "off",
         "no-unused-vars": "warn",
         "semi": ["error", "always"],
         "object-curly-spacing": ["error", "always"],

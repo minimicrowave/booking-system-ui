@@ -33,6 +33,12 @@ describe('<NavBar/>', () => {
         await userEvent.click(button);
         await waitFor(() => {
             expect(mockedNavigate).toHaveBeenCalledTimes(1);
+            expect(mockedNavigate).toHaveBeenCalledWith(
+                '/login',
+                expect.objectContaining({
+                    replace: true,
+                })
+            );
         });
     });
 });

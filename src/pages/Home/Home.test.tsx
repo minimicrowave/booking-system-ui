@@ -1,29 +1,47 @@
 import React from 'react';
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Home } from 'pages';
-import { MemoryRouter } from 'react-router-dom';
+import { CARDS_METADATA } from 'pages/Home';
+
+const mockedNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+    ...(jest.requireActual('react-router-dom') as any),
+    useNavigate: () => mockedNavigate,
+}));
 
 describe('<Home/>', () => {
-    const navBarId = 'bsui-navbar';
     const cardId = 'bsui-card';
 
     beforeEach(() => {
-        render(
-            <MemoryRouter>
-                <Home />
-            </MemoryRouter>
-        );
+        render(<Home />);
     });
 
-    it('should render with navbar and cards', async () => {
-        const navBar = await screen.findByTestId(navBarId);
+    it('should render cards', async () => {
         const cards = await screen.findAllByTestId(cardId);
 
-        expect(navBar).toBeTruthy();
-        expect(cards).toHaveLength(2);
+        expect(cards).toHaveLength(CARDS_METADATA.length);
     });
 
-    // FIXME: RRD mocking required, to find out
-    it.skip('should redirect to their respective pages', () => {});
+    it('should redirect to their respective pages upon clicking card', async () => {
+        const cards = await screen.findAllByTestId(cardId);
+
+        for (const index in CARDS_METADATA) {
+            const card = cards[index];
+
+            // user clicks on card
+            await userEvent.click(card);
+            await waitFor(() => {
+                expect(mockedNavigate).toHaveBeenCalledTimes(Number(index) + 1);
+                expect(mockedNavigate).toHaveBeenCalledWith(
+                    CARDS_METADATA[index].path,
+                    expect.objectContaining({
+                        replace: true,
+                    })
+                );
+            });
+        }
+    });
 });

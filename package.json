@@ -70,8 +70,10 @@
         "collectCoverageFrom": [
             "src/**/*.{js,jsx,ts,tsx}",
             "!src/test/**",
-            "!src/common/api",
-            "!src/common/config",
+            "!src/common/api/**",
+            "!src/common/constants/**",
+            "!src/common/config/**",
+            "!src/common/interfaces/**",
             "!src/reportWebVitals.ts"
         ]
     }

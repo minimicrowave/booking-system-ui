@@ -25,7 +25,7 @@
         "start": "craco start",
         "build": "craco build",
         "test": "craco test",
-        "test:cov": "craco test --coverage",
+        "test:cov": "craco test --coverage --watchAll",
         "lint": "npx eslint src --ext .ts,.tsx",
         "lint:fix": "npx eslint --fix src --ext .ts,.tsx",
         "eject": "craco eject"
@@ -68,7 +68,11 @@
             "/node_modules/(?!antd|@ant-design|rc-.+?|@babel/runtime).+(js|jsx)$"
         ],
         "collectCoverageFrom": [
-            "src/**/*.{js,jsx,ts,tsx}"
+            "src/**/*.{js,jsx,ts,tsx}",
+            "!src/test/**",
+            "!src/common/api",
+            "!src/common/config",
+            "!src/reportWebVitals.ts"
         ]
     }
 }

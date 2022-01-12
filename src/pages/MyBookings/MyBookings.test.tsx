@@ -42,6 +42,7 @@ const data = [
         },
     },
 ];
+
 describe('<MyBookings/>', () => {
     const navBarId = 'bsui-navbar';
     const tableId = 'bsui-table';

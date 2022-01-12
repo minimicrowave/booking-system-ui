@@ -1,5 +1,7 @@
 import React from 'react';
 
+import TEST_ID from 'test/testIds.constant';
+
 export interface ILogoOptions {
     size: number;
 }
@@ -10,7 +12,7 @@ function Logo({ size }: ILogoOptions) {
             width={size.toString()}
             viewBox="0 0 320.00000000000006 84.99822033002103"
             className="css-1j8o68f"
-            data-testid="bsui-logo"
+            data-testid={TEST_ID.LOGO}
         >
             <defs id="SvgjsDefs1609"></defs>
             <g

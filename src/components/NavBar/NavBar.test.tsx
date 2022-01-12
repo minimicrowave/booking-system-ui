@@ -2,40 +2,32 @@ import React from 'react';
 
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
+import TEST_ID from 'test/testIds.constant';
 
 import NavBar from '.';
 
-describe('<NavBar/>', () => {
-    const logoId = 'bsui-logo';
-    const buttonId = 'bsui-button';
+const mockedNavigate = jest.fn();
 
+jest.mock('react-router-dom', () => ({
+    ...(jest.requireActual('react-router-dom') as any),
+    useNavigate: () => mockedNavigate,
+}));
+
+describe('<NavBar/>', () => {
     beforeEach(() => {
-        render(
-            <MemoryRouter>
-                <NavBar />
-            </MemoryRouter>
-        );
+        render(<NavBar />);
     });
 
     it('should render with logo and button', async () => {
-        const button = await screen.findByTestId(buttonId);
-        const logo = await screen.findByTestId(logoId);
+        const button = await screen.findByTestId(TEST_ID.BUTTON);
+        const logo = await screen.findByTestId(TEST_ID.LOGO);
 
-        expect(logo).toBeTruthy();
-        expect(button).toBeTruthy();
+        expect(logo).toBeInTheDocument();
+        expect(button).toBeInTheDocument();
     });
 
-    it.skip('should redirect to login page upon clicking logout button', async () => {
-        // FIXME: can't mock RRD :/
-        const button = await screen.findByTestId(buttonId);
-
-        const mockedNavigate = jest.fn((s) => s);
-
-        jest.mock('react-router-dom', () => ({
-            ...jest.requireActual('react-router-dom'),
-            useNavigation: () => mockedNavigate,
-        }));
+    it('should redirect to login page upon clicking logout button', async () => {
+        const button = await screen.findByTestId(TEST_ID.BUTTON);
 
         // click logout button
         await userEvent.click(button);

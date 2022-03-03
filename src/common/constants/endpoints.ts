@@ -4,5 +4,6 @@ export default {
         getUserBookings: (userId: string) => `/bookings/users/${userId}`,
         getLocations: () => `/locations`,
         createNewBooking: () => `/bookings`,
+        removeBooking: (id: string) => `/bookings/${id}`,
     },
 };

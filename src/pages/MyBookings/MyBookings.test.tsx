@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { render, screen } from '@testing-library/react';
-import * as bookingService from 'common/services/bookingService';
-import { MemoryRouter } from 'react-router-dom';
-import { createAxiosResponse } from 'test/helpers';
+import mockAxios from 'axios';
+import { wrapper } from 'test/helpers';
+import TEST_ID from 'test/testIds.constant';
 
 import MyBookings from '.';
 
-const data = [
+const dummyData = [
     {
         datetimeStart: '2021-12-04T20:00:00.000Z',
         datetimeEnd: '2021-12-06T23:00:00.000Z',
@@ -44,41 +44,19 @@ const data = [
 ];
 
 describe('<MyBookings/>', () => {
-    const navBarId = 'bsui-navbar';
-    const tableId = 'bsui-table';
     const rowId = 'ant-table-row';
 
-    it('should render with logo and button', async () => {
-        jest.spyOn(bookingService, 'getUserBookings').mockResolvedValueOnce(
-            createAxiosResponse(data)
-        );
-
-        render(
-            <MemoryRouter>
-                <MyBookings />
-            </MemoryRouter>
-        );
-
-        const navBar = await screen.findByTestId(navBarId);
-        const table = await screen.findByTestId(tableId);
-
-        expect(navBar).toBeTruthy();
-        expect(table).toBeTruthy();
+    beforeEach(() => {
+        render(wrapper(<MyBookings />));
     });
 
     it('should display data returned from API in the table accordingly', async () => {
-        jest.spyOn(bookingService, 'getUserBookings').mockResolvedValueOnce(
-            createAxiosResponse(data)
+        jest.spyOn(mockAxios, 'get').mockResolvedValueOnce('hi');
+
+        const table = await screen.findByTestId(TEST_ID.TABLE);
+
+        expect(table.getElementsByClassName(rowId)).toHaveLength(
+            dummyData.length
         );
-
-        render(
-            <MemoryRouter>
-                <MyBookings />
-            </MemoryRouter>
-        );
-
-        const table = await screen.findByTestId(tableId);
-
-        expect(table.getElementsByClassName(rowId)).toHaveLength(data.length);
     });
 });

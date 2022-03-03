@@ -40,3 +40,9 @@ export function createNewBooking(options?: object): any {
         options
     );
 }
+
+export function removeBooking() {
+    return useMutation((id: string) =>
+        instance.delete(BOOKING_API.removeBooking(id))
+    );
+}
